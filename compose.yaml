@@ -1,0 +1,36 @@
+name: minibank
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: minibank
+      POSTGRES_PASSWORD: minibank
+      POSTGRES_DB: minibank
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "minibank"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+      start_period: 20s
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@minibank.dev
+      PGADMIN_DEFAULT_PASSWORD: minibank
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports: ["5050:80"]
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+      - ./infra/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      postgres: { condition: service_healthy }
+
+volumes:
+  pgdata:
+  pgadmin:
