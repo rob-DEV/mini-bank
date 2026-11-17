@@ -3,13 +3,14 @@ name: minibank
 services:
   postgres:
     image: postgres:17
+    command: ["postgres", "-c", "synchronous_commit=off"]
     environment:
       POSTGRES_USER: minibank
       POSTGRES_PASSWORD: minibank
       POSTGRES_DB: minibank
     ports: ["5432:5432"]
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ~/dev/pgdata:/var/lib/postgresql/data:Z
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "minibank"]
       interval: 2s
@@ -32,5 +33,4 @@ services:
       postgres: { condition: service_healthy }
 
 volumes:
-  pgdata:
   pgadmin:
