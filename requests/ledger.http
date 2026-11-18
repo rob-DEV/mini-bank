@@ -1,0 +1,42 @@
+@base = http://localhost:8080
+@a = 00000000-0000-7000-8002-000000000001
+@b = 00000000-0000-7000-8002-000000000002
+@cus = 00000000-0000-7000-8001-000000000001
+
+### Balance A
+GET {{base}}/accounts/{{a}}/balance
+
+### Balance B
+GET {{base}}/accounts/{{b}}/balance
+
+### Transfer £5 A → B (fresh key each run)
+POST {{base}}/transfers
+Content-Type: application/json
+Idempotency-Key: {{$random.uuid}}
+X-Customer-Id: {{cus}}
+
+{"from_account_id": "{{a}}", "to_account_id": "{{b}}", "amount_minor": 500, "currency": "GBP"}
+
+### Transfer with a fixed key (run twice: 201, then 200 replay)
+POST {{base}}/transfers
+Content-Type: application/json
+Idempotency-Key: demo-fixed-1
+X-Customer-Id: {{cus}}
+
+{"from_account_id": "{{a}}", "to_account_id": "{{b}}", "amount_minor": 500, "currency": "GBP"}
+
+### Same key, different amount (409)
+POST {{base}}/transfers
+Content-Type: application/json
+Idempotency-Key: demo-fixed-1
+X-Customer-Id: {{cus}}
+
+{"from_account_id": "{{a}}", "to_account_id": "{{b}}", "amount_minor": 600, "currency": "GBP"}
+
+### Overdraft (422)
+POST {{base}}/transfers
+Content-Type: application/json
+Idempotency-Key: {{$random.uuid}}
+X-Customer-Id: {{cus}}
+
+{"from_account_id": "{{a}}", "to_account_id": "{{b}}", "amount_minor": 99999999, "currency": "GBP"}
