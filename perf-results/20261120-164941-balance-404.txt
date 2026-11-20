@@ -1,0 +1,49 @@
+# scenario=balance-404 duration=30s conc=200 base=http://localhost:8080
+# git=65a252a host=fedora-desktop
+Summary:
+  Success rate:	100.00%
+  Total:	30007.6169 ms
+  Slowest:	55.4325 ms
+  Fastest:	0.0873 ms
+  Average:	1.6005 ms
+  Requests/sec:	124775.7865
+
+  Total data:	217.81 MiB
+  Size/request:	61 B
+  Size/sec:	7.26 MiB
+
+Response time histogram:
+   0.087 ms [1]       |
+   5.622 ms [3740737] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  11.156 ms [90]      |
+  16.691 ms [400]     |
+  22.225 ms [69]      |
+  27.760 ms [132]     |
+  33.294 ms [400]     |
+  38.829 ms [339]     |
+  44.363 ms [551]     |
+  49.898 ms [711]     |
+  55.432 ms [599]     |
+
+Response time distribution:
+  10.00% in 1.1763 ms
+  25.00% in 1.3077 ms
+  50.00% in 1.4693 ms
+  75.00% in 1.7453 ms
+  90.00% in 2.1498 ms
+  95.00% in 2.3582 ms
+  99.00% in 2.8648 ms
+  99.90% in 4.8151 ms
+  99.99% in 50.9471 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.1685 ms, 0.0640 ms, 0.5237 ms
+  DNS-lookup:	0.0034 ms, 0.0006 ms, 0.0343 ms
+  First byte:	1.6003 ms, 0.0872 ms, 55.4324 ms
+
+Status code distribution:
+  [404] 3744029 responses
+
+Error distribution:
+  [195] aborted due to deadline

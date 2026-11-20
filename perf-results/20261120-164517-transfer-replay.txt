@@ -1,0 +1,50 @@
+# scenario=transfer-replay duration=30s conc=200 base=http://localhost:8080
+# git=65a252a host=fedora-desktop
+Summary:
+  Success rate:	100.00%
+  Total:	30003.0267 ms
+  Slowest:	45.4600 ms
+  Fastest:	0.4963 ms
+  Average:	4.5203 ms
+  Requests/sec:	44216.0724
+
+  Total data:	93.61 MiB
+  Size/request:	74 B
+  Size/sec:	3.12 MiB
+
+Response time histogram:
+   0.496 ms [1]       |
+   4.993 ms [1206015] |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+   9.489 ms [118237]  |■■■
+  13.985 ms [166]     |
+  18.482 ms [137]     |
+  22.978 ms [189]     |
+  27.475 ms [514]     |
+  31.971 ms [287]     |
+  36.467 ms [301]     |
+  40.964 ms [368]     |
+  45.460 ms [204]     |
+
+Response time distribution:
+  10.00% in 4.1075 ms
+  25.00% in 4.2344 ms
+  50.00% in 4.4084 ms
+  75.00% in 4.6906 ms
+  90.00% in 4.9704 ms
+  95.00% in 5.1181 ms
+  99.00% in 5.4734 ms
+  99.90% in 26.1848 ms
+  99.99% in 43.0697 ms
+
+
+Details (average, fastest, slowest):
+  DNS+dialup:	0.1753 ms, 0.0690 ms, 0.4490 ms
+  DNS-lookup:	0.0038 ms, 0.0006 ms, 0.0625 ms
+  First byte:	4.5201 ms, 0.4961 ms, 45.4599 ms
+
+Status code distribution:
+  [200] 1326418 responses
+  [201] 1 responses
+
+Error distribution:
+  [197] aborted due to deadline
